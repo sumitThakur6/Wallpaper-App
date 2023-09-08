@@ -1,0 +1,47 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<com.google.android.material.appbar.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    >
+
+   <androidx.appcompat.widget.Toolbar
+       android:id="@+id/customToolbar"
+       android:layout_width="match_parent"
+       android:layout_height="?attr/actionBarSize"
+       app:layout_scrollFlags="scroll|enterAlways|snap"
+       app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+       app:titleTextColor="@color/white"
+       />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        app:tabIndicatorColor="#058344"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="#119716"
+        android:background="@color/toolBarBackground"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        />
+
+</com.google.android.material.appbar.AppBarLayout>
+    
+    
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+    
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

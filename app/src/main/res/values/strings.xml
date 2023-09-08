@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Wallpaper App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="content">In this scrolling, the AppBar with Flexible space will be placed behind the content. Once content starts scrolling, the app bar will scroll faster than the content until it gets out of the overlapping content view. Once the content reaches top, app bar comes upside of the content and content goes underneath and scrolls smoothly.\nThe whole AppBar can scroll off-screen along with content and can be returned while reverse scrolling.\nThere will not be any TabBar placement in this behavior.</string>
+</resources>
