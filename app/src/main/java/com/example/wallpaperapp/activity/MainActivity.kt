@@ -1,10 +1,14 @@
 package com.example.wallpaperapp.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.wallpaperapp.R
@@ -47,39 +51,11 @@ class MainActivity : AppCompatActivity() {
 
 //        setupTabLayout()
 
-    }
-
-    private fun setupTabLayout() {
-
-        viewPager2.adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
-
-        tabLayout.addTab(tabLayout.newTab().setText("Home"))
-        tabLayout.addTab(tabLayout.newTab().setText("Explore"))
-        tabLayout.addTab(tabLayout.newTab().setText("Saved"))
-
-
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (tab != null) {
-                    viewPager2.currentItem = tab.position
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-        })
-
-        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                tabLayout.selectTab(tabLayout.getTabAt(position))
-            }
-        })
+        getPermission()
 
     }
+
+
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -95,6 +71,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun getPermission(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
+        }
     }
 
 }

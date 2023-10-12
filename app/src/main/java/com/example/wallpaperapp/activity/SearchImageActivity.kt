@@ -33,15 +33,6 @@ class SearchImageActivity : AppCompatActivity(), OnSearchItemClick {
     private lateinit var viewModel : WallpaperViewModel
     private lateinit var mAdapter : SearchImageAdapter
 
-    private var permissionValue = 0
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
-        permissionValue = if (it){
-            1
-        }
-        else{
-            0
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,8 +80,6 @@ class SearchImageActivity : AppCompatActivity(), OnSearchItemClick {
     }
 
     override fun OnDownloadBtnClick(url: String) {
-        requestPermissionLauncher.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if(permissionValue == 1)
             downloadImageFromUrl(url)
     }
 

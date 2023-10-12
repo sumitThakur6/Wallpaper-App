@@ -37,16 +37,6 @@ class HomeFragment : Fragment(), OnItemClick {
     private lateinit var binding : FragmentHomeBinding
     private lateinit var viewModel: WallpaperViewModel
 
-    private var permissionValue = 0
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
-        permissionValue = if (it){
-            1
-        }
-        else{
-            0
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -91,8 +81,6 @@ class HomeFragment : Fragment(), OnItemClick {
     }
 
     override fun OnDownloadBtnClick(url: String) {
-        requestPermissionLauncher.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if(permissionValue == 1)
             downloadImageFromUrl(url)
     }
 

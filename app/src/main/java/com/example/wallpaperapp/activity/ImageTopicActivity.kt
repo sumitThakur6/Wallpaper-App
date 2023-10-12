@@ -1,6 +1,8 @@
 package com.example.wallpaperapp.activity
 
+import android.Manifest
 import android.app.DownloadManager
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -8,6 +10,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -33,16 +37,6 @@ class ImageTopicActivity : AppCompatActivity(), OnItemClick {
     private lateinit var viewModel : WallpaperViewModel
     private lateinit var mAdapter : WallPaperAdapter
 
-    private var permissionValue = 0
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
-        permissionValue = if (it){
-            1
-        }
-        else{
-            0
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityImageTopicBinding.inflate(layoutInflater)
@@ -51,6 +45,8 @@ class ImageTopicActivity : AppCompatActivity(), OnItemClick {
         supportActionBar?.title = null
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24)
+
+
 
         val intent = intent
         val topicId = intent.getStringExtra("topicId")
@@ -87,6 +83,7 @@ class ImageTopicActivity : AppCompatActivity(), OnItemClick {
 
     }
 
+
     private fun setupRecyclerView() {
         mAdapter = WallPaperAdapter(this, this)
         binding.rvImageTopic.apply {
@@ -96,8 +93,6 @@ class ImageTopicActivity : AppCompatActivity(), OnItemClick {
     }
 
     override fun OnDownloadBtnClick(url: String) {
-        requestPermissionLauncher.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if(permissionValue == 1)
             downloadImageFromUrl(url)
     }
 
